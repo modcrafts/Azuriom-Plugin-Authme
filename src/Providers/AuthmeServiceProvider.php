@@ -3,8 +3,10 @@
 namespace Azuriom\Plugin\Authme\Providers;
 
 use Azuriom\Extensions\Plugin\BasePluginServiceProvider;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Auth\Events\Registered;
+use Azuriom\Plugin\Authme\Cards\AuthmeViewCard;
 
 class AuthmeServiceProvider extends BasePluginServiceProvider
 {
@@ -73,14 +75,18 @@ class AuthmeServiceProvider extends BasePluginServiceProvider
 
         $this->registerAdminNavigation();
 
-	$this->registerUserNavigation();
+	    $this->registerUserNavigation();
 
- 	//
-	Event::listen(function (Registered $event) {
-		$event->user->forceFill([
-		'authme_username' => strtolower($event->user->name)
-		])->save();
-	});
+ 	    //
+        Event::listen(function (Registered $event) {
+            $event->user->forceFill([
+            'authme_username' => strtolower($event->user->name)
+            ])->save();
+        });
+
+        
+        View::composer('profile.index', AuthmeViewCard::class);
+
     }
 
     /**
