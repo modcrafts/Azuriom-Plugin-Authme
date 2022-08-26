@@ -3,7 +3,7 @@
     <label class="form-label">{{ trans('authme::messages.click2login.status.info') }}</label> 
     @if($user->authme_hasSession == 1)
         @if($user->authme_last_login_at + 7200000 > time()*1000 && $user->last_login_ip == Request::ip())
-            <font color="#1cbb8c"> {{ trans('authme::messages.click2login.status.vaild') }}{{ trans('authme::messages.click2login.status.expire-date', ['date' => Date("Y-m-d H:i:s", ($user->authme_last_login_at + 7200000) / 1000)]) }} </font>
+            <font color="#1cbb8c"> {{ trans('authme::messages.click2login.status.vaild') }}{{ trans('authme::messages.click2login.status.expire-date', ['date' => format_date_compact(Carbon\Carbon::parse(($user->authme_last_login_at + 7200000) / 1000))]) }} </font>
         @elseif($user->last_login_ip != Request::ip() && $user->authme_last_login_at + 7200000 > time()*1000)
             <font color="#1cbb8c"> {{ trans('authme::messages.click2login.status.vaild') }} </font><font color="#dc3545">{{ trans('authme::messages.click2login.status.unavailable') }}</font>
         @else
