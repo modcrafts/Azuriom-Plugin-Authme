@@ -1,5 +1,5 @@
 <div class="mb-3">
-    <label class="form-label">{!! trans('authme::messages.click2login.info') !!}</label>
+    <label class="form-label">@lang('authme::messages.click2login.info')</label><br>
     <label class="form-label">{{ trans('authme::messages.click2login.status.info') }}</label> 
     @if($user->authme_hasSession == 1)
         @if($user->authme_last_login_at + 7200000 > time()*1000 && $user->last_login_ip == Request::ip())

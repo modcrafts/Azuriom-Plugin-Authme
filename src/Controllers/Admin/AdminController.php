@@ -15,4 +15,9 @@ class AdminController extends Controller
     {
         return view('authme::admin.index');
     }
+
+    public function configure()
+    {
+        return view('authme::admin.configure');
+    }
 }

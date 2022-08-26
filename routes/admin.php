@@ -15,4 +15,5 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [AdminController::class, 'index']);
+//Route::get('/', [AdminController::class, 'index'])->name('home');
+Route::get('/configure', [AdminController::class, 'configure'])->name('configure');

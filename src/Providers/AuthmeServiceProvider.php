@@ -109,6 +109,14 @@ class AuthmeServiceProvider extends BasePluginServiceProvider
     protected function adminNavigation()
     {
         return [
+            'authme'=>[
+                'name' => trans('authme::admin.title'),
+                'type' => 'dropdown',
+                'icon' => 'bi bi-shield-lock',
+                'items' => [
+                    'authme.admin.configure' => trans('authme::admin.configure.title'),
+                ],
+            ]
             //
         ];
     }
