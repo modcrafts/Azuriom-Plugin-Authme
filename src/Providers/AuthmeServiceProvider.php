@@ -3,10 +3,10 @@
 namespace Azuriom\Plugin\Authme\Providers;
 
 use Azuriom\Extensions\Plugin\BasePluginServiceProvider;
-use Illuminate\Support\Facades\View;
-use Illuminate\Support\Facades\Event;
-use Illuminate\Auth\Events\Registered;
 use Azuriom\Plugin\Authme\Cards\AuthmeViewCard;
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\View;
 
 class AuthmeServiceProvider extends BasePluginServiceProvider
 {
@@ -75,18 +75,16 @@ class AuthmeServiceProvider extends BasePluginServiceProvider
 
         $this->registerAdminNavigation();
 
-	    $this->registerUserNavigation();
+        $this->registerUserNavigation();
 
- 	    //
+        //
         Event::listen(function (Registered $event) {
             $event->user->forceFill([
-            'authme_username' => strtolower($event->user->name)
+                'authme_username' => strtolower($event->user->name),
             ])->save();
         });
 
-        
         View::composer('profile.index', AuthmeViewCard::class);
-
     }
 
     /**
@@ -109,14 +107,14 @@ class AuthmeServiceProvider extends BasePluginServiceProvider
     protected function adminNavigation()
     {
         return [
-            'authme'=>[
-                'name' => trans('authme::admin.title'),
-                'type' => 'dropdown',
-                'icon' => 'bi bi-shield-lock',
+            'authme'=> [
+                'name'  => trans('authme::admin.title'),
+                'type'  => 'dropdown',
+                'icon'  => 'bi bi-shield-lock',
                 'items' => [
                     'authme.admin.configure' => trans('authme::admin.configure.title'),
                 ],
-            ]
+            ],
             //
         ];
     }
@@ -132,5 +130,4 @@ class AuthmeServiceProvider extends BasePluginServiceProvider
             //
         ];
     }
-    
 }
